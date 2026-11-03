@@ -1,0 +1,133 @@
+.profile-page {
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 36px 24px 48px;
+}
+.profile-heading {
+  margin-bottom: 24px;
+}
+.profile-heading h1 {
+  font-size: 29px;
+  margin: 12px 0 10px;
+  letter-spacing: -0.7px;
+}
+.profile-heading p,
+.profile-help,
+.profile-summary p,
+.danger-panel p,
+.delete-dialog p {
+  font-size: 13px;
+  line-height: 1.8;
+  color: #737c8e;
+}
+.profile-panel {
+  padding: 25px;
+  background: #fff;
+  border: 1px solid #e5e8f0;
+  border-radius: 12px;
+  margin-bottom: 22px;
+}
+.profile-panel h2,
+.delete-dialog h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.profile-summary {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.profile-summary p {
+  overflow-wrap: anywhere;
+}
+.profile-avatar {
+  display: grid;
+  place-items: center;
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  color: #6266c7;
+  background: #eff0ff;
+  flex-shrink: 0;
+}
+.profile-help {
+  margin-bottom: 20px;
+}
+.profile-fields {
+  display: grid;
+  grid-template-columns: 1fr 120px;
+  gap: 18px;
+}
+.profile-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.profile-form .button:disabled {
+  opacity: 0.7;
+  cursor: wait;
+  transform: none;
+}
+.profile-page .notice-success {
+  background: #edf8f0;
+  color: #3b7259;
+}
+.profile-page .form-notice {
+  animation: enter 0.2s ease-out;
+}
+.profile-form input[readonly] {
+  background: #f6f7fb;
+  color: #7a8498;
+}
+.danger-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border-color: #f0dfe2;
+}
+.danger-panel h2 {
+  color: #a44350;
+}
+.danger-button {
+  background: #b34e5d;
+}
+.danger-button:hover {
+  background: #9c4050;
+}
+.delete-dialog {
+  width: min(460px, calc(100% - 32px));
+  padding: 28px;
+  border: 1px solid #e5e8f0;
+  border-radius: 14px;
+  color: #303747;
+  box-shadow: 0 12px 40px #27304426;
+}
+.delete-dialog::backdrop {
+  background: #26304166;
+}
+.delete-dialog .profile-actions {
+  margin-top: 22px;
+}
+@media (max-width: 600px) {
+  .profile-page {
+    padding: 28px 18px;
+  }
+  .profile-panel {
+    padding: 21px;
+  }
+  .profile-fields {
+    grid-template-columns: 1fr;
+  }
+  .danger-panel {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .profile-actions {
+    flex-direction: column;
+  }
+  .profile-actions .button {
+    width: 100%;
+  }
+}
