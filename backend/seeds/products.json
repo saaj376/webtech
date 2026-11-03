@@ -1,0 +1,7 @@
+[
+  { "productId": 1001, "productName": "Wireless Mouse", "productPrice": 799, "category": "Electronics", "quantity": 30, "description": "Compact wireless mouse with USB receiver." },
+  { "productId": 1002, "productName": "Bluetooth Headphones", "productPrice": 2499, "category": "Electronics", "quantity": 20, "description": "Over-ear rechargeable Bluetooth headphones." },
+  { "productId": 1003, "productName": "Cotton T-Shirt", "productPrice": 599, "category": "Fashion", "quantity": 50, "description": "Regular-fit cotton crew-neck T-shirt." },
+  { "productId": 1004, "productName": "Denim Jeans", "productPrice": 1499, "category": "Fashion", "quantity": 25, "description": "Classic straight-fit blue denim jeans." },
+  { "productId": 1005, "productName": "Laptop Backpack", "productPrice": 1299, "category": "Accessories", "quantity": 15, "description": "Backpack with a padded compartment for a 15-inch laptop." }
+]
