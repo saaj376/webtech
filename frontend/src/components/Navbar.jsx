@@ -1,11 +1,20 @@
 import { useState } from "react";
-import { LogOut, Menu, Search, UserRound, X, ArrowUpRight } from "lucide-react";
+import {
+  LogOut,
+  Menu,
+  Search,
+  ShoppingBag,
+  UserRound,
+  X,
+  ArrowUpRight,
+} from "lucide-react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { logout } from "../utils/auth";
+import { getRole, logout } from "../utils/auth";
 import Brand from "./Brand";
 export default function Navbar({ searchQuery = "", onSearchChange }) {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+  const role = getRole();
   const close = () => setOpen(false);
   const searchField = (
     <label className="nav-search">
@@ -31,11 +40,20 @@ export default function Navbar({ searchQuery = "", onSearchChange }) {
         <div className="nav-inner">
           <Brand />
           <nav className="desktop-links" aria-label="Main navigation">
-            <NavLink to="/">Home</NavLink>
+            <NavLink to="/dashboard">Dashboard</NavLink>
             <NavLink to="/products">Products</NavLink>
+            <NavLink to="/orders">Orders</NavLink>
+            {role === "admin" && <NavLink to="/admin">Admin</NavLink>}
           </nav>
           <div className="nav-tools">
             {onSearchChange && searchField}
+            <Link
+              to="/cart"
+              className="icon-button profile-link"
+              aria-label="Your cart"
+            >
+              <ShoppingBag size={20} strokeWidth={1.5} />
+            </Link>
             <Link
               to="/profile"
               className="icon-button profile-link"
@@ -72,15 +90,26 @@ export default function Navbar({ searchQuery = "", onSearchChange }) {
             className="mobile-navigation"
             aria-label="Mobile navigation"
           >
-            <Link to="/" onClick={close}>
-              Home
+            <Link to="/dashboard" onClick={close}>
+              Dashboard
             </Link>
             <Link to="/products" onClick={close}>
               Products
             </Link>
+            <Link to="/cart" onClick={close}>
+              Cart
+            </Link>
+            <Link to="/orders" onClick={close}>
+              Orders
+            </Link>
             <Link to="/profile" onClick={close}>
               Your profile
             </Link>
+            {role === "admin" && (
+              <Link to="/admin" onClick={close}>
+                Admin
+              </Link>
+            )}
           </nav>
         )}
       </header>

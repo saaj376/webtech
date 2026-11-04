@@ -10,7 +10,12 @@ export function getToken() {
 
 export function subscribeToAuth(callback) {
   const onStorage = (event) => {
-    if (event.key === "token" || event.key === null) callback();
+    if (
+      event.key === null ||
+      ["token", "emailId", "user"].includes(event.key)
+    ) {
+      callback();
+    }
   };
   window.addEventListener(AUTH_CHANGED, callback);
   window.addEventListener("storage", onStorage);
@@ -18,6 +23,14 @@ export function subscribeToAuth(callback) {
     window.removeEventListener(AUTH_CHANGED, callback);
     window.removeEventListener("storage", onStorage);
   };
+}
+
+export function getUser() {
+  try {
+    return JSON.parse(localStorage.getItem("user") || "null");
+  } catch {
+    return null;
+  }
 }
 
 export function getEmailId() {
@@ -28,8 +41,14 @@ export function getEmailId() {
   }
 }
 
-export function storeToken(token, emailId) {
-  localStorage.setItem("emailId", emailId.trim().toLowerCase());
+export function getRole() {
+  return getUser()?.role || "";
+}
+
+export function storeToken(token, user) {
+  const emailId = String(user?.emailId || "").trim().toLowerCase();
+  localStorage.setItem("emailId", emailId);
+  localStorage.setItem("user", JSON.stringify({ ...user, emailId }));
   localStorage.setItem("token", token);
   window.dispatchEvent(new Event(AUTH_CHANGED));
 }
@@ -38,6 +57,7 @@ export function clearToken() {
   try {
     localStorage.removeItem("token");
     localStorage.removeItem("emailId");
+    localStorage.removeItem("user");
   } finally {
     window.dispatchEvent(new Event(AUTH_CHANGED));
   }

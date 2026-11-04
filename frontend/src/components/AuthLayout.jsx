@@ -31,7 +31,7 @@ export default function AuthLayout({ children, login = false }) {
             )}
           </h2>
           <p>
-            From new gadgets to everyday essentials,
+            From everyday clothing to simple accessories,
             <br />
             find a little something that feels like you.
           </p>
@@ -52,8 +52,8 @@ export default function AuthLayout({ children, login = false }) {
           </div>
         </div>
         <div className="auth-visual-bottom">
-          <span>Electronics</span>
-          <span>Fashion</span>
+          <span>Tops</span>
+          <span>Bottoms</span>
           <span>Accessories</span>
         </div>
       </aside>

@@ -15,7 +15,7 @@ import Footer from "../components/Footer";
 import FormInput from "../components/FormInput";
 import Button from "../components/Button";
 import api from "../services/api";
-import { clearToken, getEmailId } from "../utils/auth";
+import { clearToken, getEmailId, getUser } from "../utils/auth";
 import { validatePassword } from "../utils/formValidation";
 import "../styles/profile.css";
 
@@ -34,6 +34,7 @@ function profileError(error) {
 
 export default function Profile() {
   const emailId = getEmailId();
+  const isAdmin = getUser()?.role === "admin";
   const navigate = useNavigate();
   const [profile, setProfile] = useState(null);
   const [values, setValues] = useState({ username: "", age: "", password: "" });
@@ -304,7 +305,7 @@ export default function Profile() {
                 </Button>
               )}
             </section>
-            {profile && (
+            {profile && !isAdmin && (
               <section className="profile-panel danger-panel">
                 <div>
                   <h2>Delete account</h2>

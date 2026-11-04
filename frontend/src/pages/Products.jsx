@@ -3,12 +3,14 @@ import {
   ArrowUpRight,
   Box,
   Check,
+  CheckCircle2,
   CircleAlert,
   Leaf,
   Shapes,
   SlidersHorizontal,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import ProductCard from "../components/ProductCard";
@@ -24,6 +26,8 @@ export default function Products() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [requestVersion, setRequestVersion] = useState(0);
+  const [addingId, setAddingId] = useState(null);
+  const [cartNotice, setCartNotice] = useState(null);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -76,6 +80,30 @@ export default function Products() {
     setSearchQuery("");
     setSelectedCategory("");
   }
+  function trackClick(productId) {
+    api.post("/api/analytics", { productId, type: "click" }).catch(() => {});
+  }
+  async function addToCart(productId) {
+    setAddingId(productId);
+    setCartNotice(null);
+    try {
+      await api.post("/api/cart", { productId, quantity: 1 });
+      api
+        .post("/api/analytics", { productId, type: "add_to_cart" })
+        .catch(() => {});
+      setCartNotice({ type: "success", message: "Added to your cart." });
+    } catch (requestError) {
+      if (requestError.response?.status === 401) return;
+      setCartNotice({
+        type: "error",
+        message:
+          requestError.response?.data?.message ||
+          "We couldn’t add that item right now. Please try again.",
+      });
+    } finally {
+      setAddingId(null);
+    }
+  }
   return (
     <div className="store-page">
       <a href="#main-content" className="skip-link">
@@ -92,7 +120,7 @@ export default function Products() {
               <em>Made for you.</em>
             </h1>
             <p>
-              Explore electronics, fashion and accessories.
+              Explore everyday clothing and accessories.
               <br className="desktop-break" /> Find your next favorite, all in
               one place.
             </p>
@@ -124,7 +152,7 @@ export default function Products() {
         </section>
         <div className="values-strip">
           <span>
-            <Shapes size={19} strokeWidth={1.3} /> Electronics & more
+            <Shapes size={19} strokeWidth={1.3} /> Clothing & more
           </span>
           <span>
             <Check size={19} strokeWidth={1.3} /> Your everyday essentials, all
@@ -180,6 +208,27 @@ export default function Products() {
               />
             </span>
           </div>
+          {cartNotice && (
+            <div
+              className={`form-notice notice-${cartNotice.type}`}
+              role={cartNotice.type === "error" ? "alert" : "status"}
+            >
+              {cartNotice.type === "success" ? (
+                <CheckCircle2 size={17} aria-hidden="true" />
+              ) : (
+                <CircleAlert size={17} aria-hidden="true" />
+              )}
+              <span>
+                {cartNotice.message}
+                {cartNotice.type === "success" && (
+                  <>
+                    {" "}
+                    <Link to="/cart">View cart</Link>
+                  </>
+                )}
+              </span>
+            </div>
+          )}
           {isLoading ? (
             <PageLoader />
           ) : error ? (
@@ -199,7 +248,13 @@ export default function Products() {
           ) : filteredProducts.length ? (
             <div className="product-grid">
               {filteredProducts.map((product) => (
-                <ProductCard key={product.productId} product={product} />
+                <ProductCard
+                  key={product.productId}
+                  product={product}
+                  onAdd={addToCart}
+                  onTrackClick={trackClick}
+                  adding={addingId === product.productId}
+                />
               ))}
             </div>
           ) : (

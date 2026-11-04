@@ -7,22 +7,23 @@ const api = axios.create({
   headers: { "Content-Type": "application/json" },
 });
 
-function isProtectedRequest(config) {
+function shouldAttachToken(config) {
   const base = new URL(api.defaults.baseURL);
   const target = new URL(config.url, config.baseURL || base);
   if (target.origin !== base.origin) return false;
+
   const path = target.pathname.replace(/\/+$/, "");
   const method = (config.method || "get").toLowerCase();
-  return (
-    path === "/api/products" ||
-    path.startsWith("/api/products/") ||
-    (path === "/api/users" &&
-      ["get", "put", "patch", "delete"].includes(method))
-  );
+
+  if (method === "post" && (path === "/api/login" || path === "/api/users")) {
+    return false;
+  }
+
+  return path.startsWith("/api/");
 }
 
 api.interceptors.request.use((config) => {
-  if (isProtectedRequest(config)) {
+  if (shouldAttachToken(config)) {
     const token = getToken();
     if (token) config.headers.set("Authorization", `Bearer ${token}`);
   }
@@ -35,7 +36,7 @@ api.interceptors.response.use(
     if (
       error.response?.status === 401 &&
       error.config &&
-      isProtectedRequest(error.config)
+      shouldAttachToken(error.config)
     ) {
       const sentToken = error.config.headers.get("Authorization");
       // A late response from an old session must not remove a newer login token.

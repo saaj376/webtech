@@ -23,6 +23,11 @@ const userSchema = new mongoose.Schema({
     select: false,
     match: [/^\$2[aby]\$(0[4-9]|[12]\d|3[01])\$[./A-Za-z0-9]{53}$/, 'Password must be a bcrypt hash.'],
   },
-}, { collection: 'users' });
+  role: {
+    type: String,
+    enum: ['user', 'admin'],
+    default: 'user',
+  },
+}, { collection: 'users', timestamps: true });
 
 module.exports = mongoose.model('User', userSchema);
