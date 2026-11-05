@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 const authMiddleware = require('../middleware/authMiddleware');
+const ownerOrAdmin = require('../middleware/ownerOrAdmin');
 
 const router = express.Router();
 
@@ -65,35 +66,9 @@ function handleProfileError(error, res) {
   return res.status(500).json({ message: 'Unable to manage user profile. Please try again later.' });
 }
 
-async function loadOwnProfile(req, res, next) {
-  const { emailId } = req.query;
-  if (typeof emailId !== 'string' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailId.trim())) {
-    return res.status(400).json({ message: 'Invalid input details' });
-  }
-
-  try {
-    const user = await User.findOne({ emailId: emailId.trim().toLowerCase() });
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-
-    if (user._id.toString() !== req.user.userId) {
-      return res.status(403).json({ message: 'You can only manage your own profile' });
-    }
-
-    req.profileFilter = { _id: user._id, emailId: user.emailId };
-    req.profile = user;
-  } catch (error) {
-    return handleProfileError(error, res);
-  }
-
-  return next();
-}
-
-// Profile viewing reuses the same authentication and ownership checks as updates.
-router.get('/', authMiddleware, loadOwnProfile, (req, res) => {
-  const { username, emailId, age } = req.profile;
-  return res.status(200).json({ username, emailId, age });
+router.get('/', authMiddleware, ownerOrAdmin, (req, res) => {
+  const { username, emailId, age, role } = req.profile;
+  return res.status(200).json({ username, emailId, age, role });
 });
 
 function updateProfile(requireAllFields) {
@@ -140,6 +115,12 @@ function updateProfile(requireAllFields) {
         message: requireAllFields
           ? 'User details updated successfully'
           : 'Selected details updated successfully',
+        user: {
+          username: user.username,
+          emailId: user.emailId,
+          age: user.age,
+          role: user.role,
+        },
       });
     } catch (error) {
       return handleProfileError(error, res);
@@ -147,10 +128,15 @@ function updateProfile(requireAllFields) {
   };
 }
 
-router.put('/', authMiddleware, loadOwnProfile, updateProfile(true));
-router.patch('/', authMiddleware, loadOwnProfile, updateProfile(false));
+router.put('/', authMiddleware, ownerOrAdmin, updateProfile(true));
+router.patch('/', authMiddleware, ownerOrAdmin, updateProfile(false));
 
-router.delete('/', authMiddleware, loadOwnProfile, async (req, res) => {
+router.delete('/', authMiddleware, ownerOrAdmin, async (req, res) => {
+  // Admins cannot delete their own account through the profile endpoint.
+  if (req.profile._id.toString() === req.user.userId && req.user.role === 'admin') {
+    return res.status(403).json({ message: 'Admins cannot delete their own account here.' });
+  }
+
   try {
     const user = await User.findOneAndDelete(req.profileFilter);
     if (!user) {

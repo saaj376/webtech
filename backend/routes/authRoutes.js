@@ -35,12 +35,27 @@ router.post('/', async (req, res) => {
       throw new Error('JWT signing secret is not configured.');
     }
 
-    const token = jwt.sign({ userId: user._id.toString() }, secret, {
+    const role = user.role || 'user';
+
+    const token = jwt.sign({
+      userId: user._id.toString(),
+      emailId: user.emailId,
+      role,
+    }, secret, {
       algorithm: 'HS256',
       expiresIn: '1h',
     });
 
-    return res.status(200).json({ message: 'Login Successful', token });
+    return res.status(200).json({
+      message: `Welcome back, ${user.username}!`,
+      token,
+      user: {
+        username: user.username,
+        emailId: user.emailId,
+        age: user.age,
+        role,
+      },
+    });
   } catch {
     console.error('User login failed.');
     return res.status(500).json({ message: 'Unable to log in. Please try again later.' });

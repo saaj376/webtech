@@ -75,8 +75,12 @@ export default function Login() {
         return;
       }
       // Storage is acceptable for this lab; the backend validates JWT signatures/expiry.
-      storeToken(token.trim(), values.emailId);
-      navigate("/products", { replace: true });
+      storeToken(token.trim(), {
+        ...response.data?.user,
+        emailId: response.data?.user?.emailId || values.emailId,
+        role: response.data?.user?.role === "admin" ? "admin" : "user",
+      });
+      navigate("/dashboard", { replace: true });
     } catch (error) {
       const status = error.response?.status;
       let message =

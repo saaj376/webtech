@@ -21,8 +21,11 @@ function authMiddleware(req, res, next) {
   try {
     const decoded = jwt.verify(bearer[1], secret, { algorithms: ['HS256'] });
 
-    if (typeof decoded !== 'object' || typeof decoded.userId !== 'string' ||
-        !decoded.userId || typeof decoded.exp !== 'number') {
+    if (typeof decoded !== 'object' ||
+        typeof decoded.userId !== 'string' || !decoded.userId ||
+        typeof decoded.emailId !== 'string' || !decoded.emailId ||
+        !['user', 'admin'].includes(decoded.role) ||
+        typeof decoded.exp !== 'number') {
       return res.status(401).json({ message: 'Invalid or expired token' });
     }
 

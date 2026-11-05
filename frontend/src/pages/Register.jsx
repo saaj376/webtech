@@ -215,7 +215,7 @@ export default function Register() {
         <p>
           Your next favorite is waiting.
           <br />
-          <span>Electronics, fashion and everyday essentials.</span>
+          <span>          Clothing, footwear and everyday essentials.</span>
         </p>
       </div>
       <p className="preview-note">

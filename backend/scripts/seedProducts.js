@@ -7,18 +7,18 @@ const products = require('../seeds/products.json');
 
 async function seedProducts() {
   try {
-    // Validate before writing; existing product IDs are left untouched.
+    // Validate before writing so a bad seed file fails before touching MongoDB.
     await Promise.all(products.map(product => new Product(product).validate()));
     await connectDB();
     await Product.init();
     const result = await Product.bulkWrite(products.map(product => ({
       updateOne: {
         filter: { productId: product.productId },
-        update: { $setOnInsert: product },
+        update: { $set: product },
         upsert: true,
       },
     })));
-    console.log(`Sample products inserted: ${result.upsertedCount}; existing products preserved: ${result.matchedCount}.`);
+    console.log(`Sample products inserted: ${result.upsertedCount}; products updated: ${result.modifiedCount}.`);
   } catch {
     console.error('Product seed failed. Check MongoDB connectivity, permissions, and product indexes.');
     process.exitCode = 1;
