@@ -188,9 +188,7 @@ export default function Profile() {
       <Navbar />
       <main className="profile-page" id="main-content">
         <header className="profile-heading">
-          <span className="form-kicker">YOUR ACCOUNT</span>
-          <h1>My Profile</h1>
-          <p>Keep your details up to date, all in one place.</p>
+          <h1>Profile</h1>
         </header>
         {loading ? (
           <div className="profile-panel" role="status">
@@ -213,10 +211,6 @@ export default function Profile() {
             )}
             <section className="profile-panel">
               <h2>Edit profile</h2>
-              <p className="profile-help">
-                Save only your changes with PATCH, or update all details with
-                PUT. A new password is required for a complete update.
-              </p>
               {feedback && (
                 <div
                   className={`form-notice notice-${feedback.type}`}
@@ -241,7 +235,7 @@ export default function Profile() {
                   }}
                 >
                   <FormInput
-                    label="Email address (cannot be changed)"
+                    label="Email address"
                     icon={Mail}
                     type="email"
                     value={profile.emailId}
@@ -273,7 +267,7 @@ export default function Profile() {
                     />
                   </div>
                   <FormInput
-                    label="New password (optional for PATCH)"
+                    label="New password"
                     name="password"
                     icon={LockKeyhole}
                     type="password"
@@ -289,10 +283,10 @@ export default function Profile() {
                       {busy && (
                         <LoaderCircle size={17} className="login-spinner" />
                       )}
-                      Save Changes (PATCH)
+                      Save changes
                     </Button>
                     <Button onClick={() => save("put")} disabled={busy}>
-                      Update All (PUT)
+                      Update all
                     </Button>
                   </div>
                 </form>

@@ -64,9 +64,7 @@ export default function Orders() {
       <Navbar />
       <main className="account-page" id="main-content">
         <header className="account-heading">
-          <span className="form-kicker">{isAdmin ? "ALL ORDERS" : "YOUR ORDERS"}</span>
           <h1>Orders</h1>
-          <p>{isAdmin ? "Every order placed in the store." : "Your order history."}</p>
         </header>
 
         {error && (

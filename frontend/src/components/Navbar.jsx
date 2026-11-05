@@ -6,7 +6,6 @@ import {
   ShoppingBag,
   UserRound,
   X,
-  ArrowUpRight,
 } from "lucide-react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { getRole, logout } from "../utils/auth";
@@ -22,7 +21,7 @@ export default function Navbar({ searchQuery = "", onSearchChange }) {
       <span className="sr-only">Search products by name</span>
       <input
         type="search"
-        placeholder="Search products..."
+        placeholder="Search"
         value={searchQuery}
         onChange={(event) => onSearchChange?.(event.target.value)}
       />
@@ -30,12 +29,6 @@ export default function Navbar({ searchQuery = "", onSearchChange }) {
   );
   return (
     <>
-      <div className="announcement">
-        A little something for your everyday.
-        <Link to="/">
-          Explore with us <ArrowUpRight size={12} />
-        </Link>
-      </div>
       <header className="site-header">
         <div className="nav-inner">
           <Brand />
@@ -103,7 +96,7 @@ export default function Navbar({ searchQuery = "", onSearchChange }) {
               Orders
             </Link>
             <Link to="/profile" onClick={close}>
-              Your profile
+              Profile
             </Link>
             {role === "admin" && (
               <Link to="/admin" onClick={close}>

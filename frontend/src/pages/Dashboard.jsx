@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import {
-  ArrowRight,
   ClipboardList,
-  Package,
   ShieldCheck,
   ShoppingBag,
   UserRound,
@@ -40,9 +38,7 @@ export default function Dashboard() {
       <Navbar />
       <main className="account-page" id="main-content">
         <header className="account-heading">
-          <span className="form-kicker">YOUR ACCOUNT</span>
           <h1>Welcome, {user?.username || "there"}</h1>
-          <p>What would you like to do today?</p>
         </header>
 
         <div className="stat-grid">
@@ -63,29 +59,14 @@ export default function Dashboard() {
           </Link>
         </div>
 
-        <section className="account-panel">
-          <h2>Quick links</h2>
-          <div className="quick-links">
-            <Link to="/products" className="quick-link">
-              <Package size={19} strokeWidth={1.4} />
-              Browse products <ArrowRight size={16} />
-            </Link>
-            <Link to="/cart" className="quick-link">
-              <ShoppingBag size={19} strokeWidth={1.4} />
-              Go to cart <ArrowRight size={16} />
-            </Link>
-            <Link to="/orders" className="quick-link">
-              <ClipboardList size={19} strokeWidth={1.4} />
-              View orders <ArrowRight size={16} />
-            </Link>
-          </div>
-          {user?.role === "admin" && (
+        {user?.role === "admin" && (
+          <section className="account-panel">
             <Link to="/admin" className="button button-blue admin-link">
               <ShieldCheck size={17} />
               Open admin panel
             </Link>
-          )}
-        </section>
+          </section>
+        )}
       </main>
       <Footer />
     </>

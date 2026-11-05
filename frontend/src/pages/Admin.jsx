@@ -255,9 +255,7 @@ export default function Admin() {
       <Navbar />
       <main className="account-page admin-page" id="main-content">
         <header className="account-heading">
-          <span className="form-kicker">ADMIN PANEL</span>
-          <h1>Store management</h1>
-          <p>Manage products, users, orders, and simple analytics.</p>
+          <h1>Admin</h1>
         </header>
 
         <div className="tabs" role="tablist" aria-label="Admin sections">
@@ -555,9 +553,6 @@ export default function Admin() {
         ) : (
           <section className="account-panel">
             <h2>Analytics</h2>
-            <p className="panel-help">
-              Total product clicks and add-to-cart actions. No user data is stored.
-            </p>
             <div className="table-wrap">
               <table className="data-table">
                 <thead>

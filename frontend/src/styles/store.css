@@ -459,8 +459,9 @@
 }
 .footer-top {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr auto;
   gap: 30px;
+  align-items: start;
 }
 .footer-top p {
   color: #8b93a3;
@@ -473,7 +474,7 @@
   flex-direction: column;
   gap: 12px;
   align-items: flex-start;
-  justify-self: center;
+  justify-self: end;
 }
 .footer-top nav a {
   display: flex;

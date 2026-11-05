@@ -4,7 +4,6 @@ import {
   LoaderCircle,
   LockKeyhole,
   Mail,
-  ShieldCheck,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -100,13 +99,9 @@ export default function Login() {
     }
   }
   return (
-    <AuthLayout login>
+    <AuthLayout>
       <div className="form-intro">
-        <span className="form-kicker">
-          <span /> GOOD TO SEE YOU AGAIN
-        </span>
-        <h1>Welcome Back</h1>
-        <p>Sign in to explore your everyday favorites.</p>
+        <h1>Sign in</h1>
       </div>
       <form
         noValidate
@@ -140,22 +135,6 @@ export default function Login() {
           onChange={change}
           error={errors.password}
         />
-        <div className="login-options">
-          <label className="checkbox-label">
-            <input type="checkbox" /> Remember Me
-          </label>
-          <button
-            type="button"
-            className="plain-link"
-            onClick={() =>
-              setNotice(
-                "Password recovery is not available in this design preview.",
-              )
-            }
-          >
-            Forgot Password?
-          </button>
-        </div>
         <FormNotice errors={errors} notice={notice} />
         {errorMessage && (
           <div
@@ -194,20 +173,6 @@ export default function Login() {
         <Link to="/" className="text-link">
           Create an account <ArrowRight size={13} />
         </Link>
-      </p>
-      <div className="form-divider">
-        <span>FIND SOMETHING YOU LOVE</span>
-      </div>
-      <div className="auth-reassurance">
-        <ShieldCheck size={20} strokeWidth={1.4} />
-        <p>
-          Ready for a little browsing?
-          <br />
-          <span>Explore our latest collection in one place.</span>
-        </p>
-      </div>
-      <p className="preview-note">
-        Remember Me is a visual option for this lab.
       </p>
     </AuthLayout>
   );
