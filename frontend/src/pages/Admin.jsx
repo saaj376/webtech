@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { Pencil, Trash2 } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -6,6 +6,8 @@ import Button from "../components/Button";
 import api from "../services/api";
 import { getUser } from "../utils/auth";
 import "../styles/account.css";
+
+const AdminAnalytics = lazy(() => import("../components/AdminAnalytics"));
 
 const priceFormat = new Intl.NumberFormat("en-IN", {
   style: "currency",
@@ -40,7 +42,6 @@ export default function Admin() {
   const [products, setProducts] = useState([]);
   const [users, setUsers] = useState([]);
   const [orders, setOrders] = useState([]);
-  const [analytics, setAnalytics] = useState([]);
   const [productForm, setProductForm] = useState(emptyProduct);
   const [editingId, setEditingId] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -63,11 +64,6 @@ export default function Admin() {
     setOrders(data.orders || []);
   }
 
-  async function loadAnalytics() {
-    const { data } = await api.get("/api/analytics");
-    setAnalytics(data.analytics || []);
-  }
-
   useEffect(() => {
     let active = true;
     setLoading(true);
@@ -78,7 +74,7 @@ export default function Admin() {
       products: loadProducts,
       users: loadUsers,
       orders: loadOrders,
-      analytics: loadAnalytics,
+      analytics: async () => {},
     };
 
     loaders[tab]()
@@ -551,31 +547,7 @@ export default function Admin() {
             </div>
           </section>
         ) : (
-          <section className="account-panel">
-            <h2>Analytics</h2>
-            <div className="table-wrap">
-              <table className="data-table">
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Product</th>
-                    <th>Clicks</th>
-                    <th>Add to cart</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {analytics.map((item) => (
-                    <tr key={item.productId}>
-                      <td>{item.productId}</td>
-                      <td>{item.productName}</td>
-                      <td>{item.clicks}</td>
-                      <td>{item.addToCarts}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </section>
+          <Suspense fallback={<p>Loading analytics…</p>}><AdminAnalytics /></Suspense>
         )}
       </main>
       <Footer />

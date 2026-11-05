@@ -71,18 +71,11 @@ export default function Products() {
     setSelectedCategory("");
   }
 
-  function trackClick(productId) {
-    api.post("/api/analytics", { productId, type: "click" }).catch(() => {});
-  }
-
   async function addToCart(productId) {
     setAddingId(productId);
     setCartNotice(null);
     try {
       await api.post("/api/cart", { productId, quantity: 1 });
-      api
-        .post("/api/analytics", { productId, type: "add_to_cart" })
-        .catch(() => {});
       setCartNotice({ type: "success", message: "Added to your cart." });
     } catch (requestError) {
       if (requestError.response?.status === 401) return;
@@ -183,7 +176,6 @@ export default function Products() {
                   key={product.productId}
                   product={product}
                   onAdd={addToCart}
-                  onTrackClick={trackClick}
                   adding={addingId === product.productId}
                 />
               ))}

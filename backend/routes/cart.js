@@ -2,6 +2,7 @@ const express = require('express');
 const authMiddleware = require('../middleware/authMiddleware');
 const Cart = require('../models/Cart');
 const Product = require('../models/Product');
+const AnalyticsEvent = require('../models/AnalyticsEvent');
 
 const router = express.Router();
 
@@ -77,6 +78,11 @@ router.post('/', async (req, res) => {
     }
 
     await cart.save();
+    // Tracking must not turn a successful cart update into an error.
+    await Promise.all([
+      AnalyticsEvent.create({ userId: req.user.userId, productId, type: 'add_to_cart' }),
+      Product.updateOne({ productId }, { $inc: { addToCarts: 1 } }),
+    ]).catch(error => console.error('Cart analytics failed:', error.message));
     return res.status(200).json({ message: 'Added to cart.' });
   } catch {
     console.error('Add to cart failed.');

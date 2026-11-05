@@ -94,3 +94,21 @@ Modified files: `src/components/AuthLayout.jsx`, `Brand.jsx`, `Navbar.jsx`,
 `public/favicon.svg`; and this README. No new dependencies or source files
 were needed. Routing, shared controls, preview fixtures and the Axios instance
 were retained. No backend files changed.
+
+## Product details, reviews, and analytics
+
+- `/products/:productId` displays any product, supports quantity selection and adding to cart, and shows the latest 50 reviews plus the overall rating.
+- Customers can create or edit one review per product after an order containing it is delivered. Ratings are integers from 1 to 5; comments are optional, up to 1,000 characters.
+- Admin → Analytics supports 7, 30, and 90 days, including today in Asia/Kolkata. Recharts provides the daily sales line chart and customer funnel bars; chart code loads only when the tab opens.
+- Sales are non-cancelled **order value**, not collected payments. Status counts use the current status of orders created in the period. Repeat buyers have at least two non-cancelled orders within the period.
+- The funnel uses nested unique-customer groups: viewed a product, also added to cart, also placed a non-cancelled order during the period. It does not attribute sessions, products, or action ordering. Historical view/cart activity is unavailable; tracking starts with the new event collection.
+- View events are recorded after a product detail page loads. Cart events and the existing cart counter are recorded by the backend after a successful cart addition.
+- Backend additions: `Review` and `AnalyticsEvent` models, `/api/products/:productId/reviews`, `/api/products/:productId/reviews/me`, and admin-only `/api/analytics/summary?days=30`. Restart the backend to register these routes and initialize indexes.
+
+Verification: `npm run build`, `npm run lint`, and from `backend`, `node --test tests/shopping-features.test.cjs`. The focused backend tests use mocked database models and an isolated HTTP listener; they do not alter the database.
+
+### Sample chart data and reviews
+
+From `backend`, run `npm run seed:demo` to populate dated sample orders, customer activity, and reviews for the first six existing products. Run `npm run seed:products` first if the catalog is empty. Refresh Admin → Analytics or open one of those products to see the data.
+
+The seed uses stable fixture IDs so rerunning updates its own orders/events instead of duplicating them. Sample customers use reserved `wearit-demo-…@example.invalid` email addresses. Sample orders affect the analytics totals but do not decrement inventory. Existing customer accounts and orders are preserved. Demo customer passwords are random; use your existing admin login to view analytics.

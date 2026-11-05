@@ -11,6 +11,8 @@ const User = require('./models/User');
 const Product = require('./models/Product');
 const Cart = require('./models/Cart');
 const Order = require('./models/Order');
+const Review = require('./models/Review');
+const AnalyticsEvent = require('./models/AnalyticsEvent');
 const userRoutes = require('./routes/userRoutes');
 const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
@@ -48,6 +50,7 @@ app.use('/api/login', rateLimit({
 
 app.use('/api/users', userRoutes);
 app.use('/api/login', authRoutes);
+app.use('/api/products/:productId/reviews', require('./routes/reviews'));
 app.use('/api/products', productRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/orders', orderRoutes);
@@ -84,7 +87,7 @@ async function startServer() {
 
   await connectDB();
   try {
-    await Promise.all([User.init(), Product.init(), Cart.init(), Order.init()]);
+    await Promise.all([User.init(), Product.init(), Cart.init(), Order.init(), Review.init(), AnalyticsEvent.init()]);
   } catch {
     await mongoose.disconnect();
     throw new Error('Unable to initialize database indexes. Check database permissions and existing duplicate values.');

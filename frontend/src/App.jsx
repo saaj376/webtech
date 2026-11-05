@@ -9,6 +9,7 @@ import {
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Products from "./pages/Products";
+import ProductDetails from "./pages/ProductDetails";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Profile from "./pages/Profile";
 import Dashboard from "./pages/Dashboard";
@@ -36,6 +37,7 @@ function PageRoutes() {
     <Routes>
       <Route path="/" element={<Register />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/products/:productId" element={<ProtectedRoute><ProductDetails /></ProtectedRoute>} />
       <Route
         path="/products"
         element={

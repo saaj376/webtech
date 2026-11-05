@@ -1,4 +1,5 @@
 import { ArrowUpRight, PackageCheck, ShoppingBag } from "lucide-react";
+import { Link } from "react-router-dom";
 import ImageWithFallback from "./ImageWithFallback";
 import { productImage } from "../utils/productImagery";
 const priceFormat = new Intl.NumberFormat("en-IN", {
@@ -9,7 +10,6 @@ const priceFormat = new Intl.NumberFormat("en-IN", {
 export default function ProductCard({
   product,
   onAdd,
-  onTrackClick,
   adding = false,
 }) {
   const {
@@ -28,11 +28,10 @@ export default function ProductCard({
   return (
     <article className="product-card" aria-labelledby={`product-${productId}`}>
       <div className="product-image">
-        <button
-          type="button"
+        <Link
+          to={`/products/${productId}`}
           className="product-image-button"
           aria-label={`View ${productName}`}
-          onClick={() => onTrackClick?.(productId)}
         >
           <ImageWithFallback
             key={productName}
@@ -42,7 +41,7 @@ export default function ProductCard({
             width="700"
             height="600"
           />
-        </button>
+        </Link>
         <span className="category-badge">{category}</span>
         <span className="product-corner" aria-hidden="true">
           <ArrowUpRight size={19} strokeWidth={1.3} />
@@ -50,7 +49,7 @@ export default function ProductCard({
       </div>
       <div className="product-info">
         <div className="product-title-row">
-          <h3 id={`product-${productId}`}>{productName}</h3>
+          <h3 id={`product-${productId}`}><Link to={`/products/${productId}`}>{productName}</Link></h3>
           <span className="product-price">
             {priceFormat.format(productPrice)}
           </span>
