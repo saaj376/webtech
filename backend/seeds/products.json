@@ -10,7 +10,7 @@
     "gender": "Unisex",
     "quantity": 40,
     "description": "100% cotton crew neck",
-    "imageUrl": ""
+    "imageUrl": "/images/products/classic-cotton-tee.jpg"
   },
   {
     "productId": 1002,
@@ -23,7 +23,7 @@
     "gender": "Men",
     "quantity": 20,
     "description": "Stretch denim, slim leg",
-    "imageUrl": ""
+    "imageUrl": "/images/products/slim-fit-jeans.jpg"
   },
   {
     "productId": 1003,
@@ -36,7 +36,7 @@
     "gender": "Unisex",
     "quantity": 15,
     "description": "Heavyweight fleece hoodie",
-    "imageUrl": ""
+    "imageUrl": "/images/products/oversized-hoodie.jpg"
   },
   {
     "productId": 1004,
@@ -49,7 +49,7 @@
     "gender": "Unisex",
     "quantity": 12,
     "description": "Lightweight mesh, cushioned sole",
-    "imageUrl": ""
+    "imageUrl": "/images/products/running-sneakers.jpg"
   },
   {
     "productId": 1005,
@@ -62,7 +62,7 @@
     "gender": "Men",
     "quantity": 30,
     "description": "Genuine leather, brushed buckle",
-    "imageUrl": ""
+    "imageUrl": "/images/products/leather-belt.jpg"
   },
   {
     "productId": 1006,
@@ -75,7 +75,7 @@
     "gender": "Women",
     "quantity": 8,
     "description": "Viscose, midi length",
-    "imageUrl": ""
+    "imageUrl": "/images/products/floral-summer-dress.jpg"
   },
   {
     "productId": 1007,
@@ -88,7 +88,7 @@
     "gender": "Women",
     "quantity": 5,
     "description": "70% wool, belted waist",
-    "imageUrl": ""
+    "imageUrl": "/images/products/wool-blend-coat.jpg"
   },
   {
     "productId": 1008,
@@ -101,7 +101,7 @@
     "gender": "Unisex",
     "quantity": 50,
     "description": "Cotton canvas, inner pocket",
-    "imageUrl": ""
+    "imageUrl": "/images/products/canvas-tote.jpg"
   },
   {
     "productId": 1009,
@@ -114,7 +114,7 @@
     "gender": "Men",
     "quantity": 0,
     "description": "Ripstop cotton, 6 pockets",
-    "imageUrl": ""
+    "imageUrl": "/images/products/cargo-shorts.jpg"
   },
   {
     "productId": 1010,
@@ -127,6 +127,84 @@
     "gender": "Women",
     "quantity": 18,
     "description": "100% mulberry silk",
-    "imageUrl": ""
+    "imageUrl": "/images/products/silk-scarf.jpg"
+  },
+  {
+    "productId": 1011,
+    "productName": "Linen Button Shirt",
+    "productPrice": 1599,
+    "category": "Tops",
+    "size": ["S", "M", "L", "XL"],
+    "color": "Beige",
+    "brand": "North",
+    "gender": "Men",
+    "quantity": 24,
+    "description": "Breathable linen, relaxed fit",
+    "imageUrl": "/images/products/linen-shirt.jpg"
+  },
+  {
+    "productId": 1012,
+    "productName": "Pleated Midi Skirt",
+    "productPrice": 1799,
+    "category": "Bottoms",
+    "size": ["XS", "S", "M", "L"],
+    "color": "Black",
+    "brand": "Bloom",
+    "gender": "Women",
+    "quantity": 14,
+    "description": "Soft pleats, elastic waist",
+    "imageUrl": "/images/products/pleated-skirt.jpg"
+  },
+  {
+    "productId": 1013,
+    "productName": "Denim Jacket",
+    "productPrice": 2999,
+    "category": "Outerwear",
+    "size": ["S", "M", "L", "XL"],
+    "color": "Blue",
+    "brand": "DenimCo",
+    "gender": "Unisex",
+    "quantity": 18,
+    "description": "Classic trucker fit, button front",
+    "imageUrl": "/images/products/denim-jacket.jpg"
+  },
+  {
+    "productId": 1014,
+    "productName": "Canvas Sneakers",
+    "productPrice": 2199,
+    "category": "Footwear",
+    "size": ["7", "8", "9", "10"],
+    "color": "White",
+    "brand": "Basics",
+    "gender": "Unisex",
+    "quantity": 22,
+    "description": "Low-top canvas, rubber sole",
+    "imageUrl": "/images/products/canvas-sneakers.jpg"
+  },
+  {
+    "productId": 1015,
+    "productName": "Aviator Sunglasses",
+    "productPrice": 1399,
+    "category": "Accessories",
+    "size": [],
+    "color": "Brown",
+    "brand": "Craft",
+    "gender": "Unisex",
+    "quantity": 35,
+    "description": "Metal frame, UV protection",
+    "imageUrl": "/images/products/aviator-sunglasses.jpg"
+  },
+  {
+    "productId": 1016,
+    "productName": "Knit Beanie",
+    "productPrice": 699,
+    "category": "Accessories",
+    "size": [],
+    "color": "Green",
+    "brand": "North",
+    "gender": "Unisex",
+    "quantity": 28,
+    "description": "Ribbed knit, warm stretch fit",
+    "imageUrl": "/images/products/knit-beanie.jpg"
   }
 ]
