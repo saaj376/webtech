@@ -1,7 +1,8 @@
 # Sample data
 
-From `backend`, run `npm run seed:products` to insert or update the ten clothing
-products in `products.json`. Prices are sample INR values. The script uses the
+From `backend`, run `npm run seed:products` to insert or update the sixteen clothing
+products in `products.json`. Product images live in
+`frontend/public/images/products`. Prices are sample INR values. The script uses the
 existing `config/db.js` connection helper and closes its connection when finished.
 
 Run `npm run seed:users` to create the demo accounts:
