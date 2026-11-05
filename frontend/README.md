@@ -1,4 +1,4 @@
-# FORME — Shopping application frontend
+# WearIt! — Shopping application frontend
 
 Step 8 provides a responsive React/Vite design preview with a friendly blue/lavender palette, white cards, straightforward copy and readable typography. The existing backend is
 unchanged. No forms submit to an API, no products are fetched, and no token or

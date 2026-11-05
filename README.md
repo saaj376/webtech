@@ -1,4 +1,4 @@
-# FORME Clothing Store
+# WearIt!
 
 A simple clothing store app built with React, Express, and MongoDB.
 

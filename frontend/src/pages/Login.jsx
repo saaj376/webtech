@@ -190,7 +190,7 @@ export default function Login() {
         </Button>
       </form>
       <p className="auth-switch">
-        New to FORME?{" "}
+        New here?{" "}
         <Link to="/" className="text-link">
           Create an account <ArrowRight size={13} />
         </Link>

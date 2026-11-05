@@ -31,7 +31,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="footer-bottom">
-        <span>© {new Date().getFullYear()} FORME. All rights reserved.</span>
+        <span>© {new Date().getFullYear()} WearIt! All rights reserved.</span>
         <span>ELECTRONICS · FASHION · ACCESSORIES</span>
         <span>India · INR ₹</span>
       </div>

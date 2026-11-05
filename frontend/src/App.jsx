@@ -30,7 +30,7 @@ function PageRoutes() {
       "/profile": "Your profile",
       "/admin": "Admin panel",
     };
-    document.title = `${names[pathname] || "Discover"} — FORME`;
+    document.title = `${names[pathname] || "Discover"} — WearIt!`;
   }, [pathname]);
   return (
     <Routes>

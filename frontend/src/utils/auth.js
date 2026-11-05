@@ -1,4 +1,4 @@
-const AUTH_CHANGED = "forme:auth-changed";
+const AUTH_CHANGED = "wearit:auth-changed";
 
 export function getToken() {
   try {

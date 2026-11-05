@@ -8,7 +8,7 @@ export default function AuthLayout({ children, login = false }) {
       <a href="#main-content" className="skip-link">
         Skip to content
       </a>
-      <aside className="auth-visual" aria-label="Discover FORME">
+      <aside className="auth-visual" aria-label="Discover WearIt!">
         <div className="auth-visual-top">
           <Brand />
           <span className="edition">Your everyday shopping spot</span>
@@ -68,7 +68,7 @@ export default function AuthLayout({ children, login = false }) {
           {children}
         </main>
         <footer className="auth-footer">
-          <span>© {new Date().getFullYear()} FORME</span>
+          <span>© {new Date().getFullYear()} WearIt!</span>
           <span>
             <Check size={13} /> Simple shopping. Good finds.
           </span>
