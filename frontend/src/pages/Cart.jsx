@@ -98,9 +98,7 @@ export default function Cart() {
       <Navbar />
       <main className="account-page" id="main-content">
         <header className="account-heading">
-          <span className="form-kicker">YOUR CART</span>
-          <h1>Shopping Cart</h1>
-          <p>Check your items before placing the order.</p>
+          <h1>Cart</h1>
         </header>
 
         {error && (

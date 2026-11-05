@@ -6,7 +6,6 @@ import {
   LoaderCircle,
   LockKeyhole,
   Mail,
-  ShieldCheck,
   UserRound,
 } from "lucide-react";
 import { useRef, useState } from "react";
@@ -95,11 +94,7 @@ export default function Register() {
   return (
     <AuthLayout>
       <div className="form-intro">
-        <span className="form-kicker">
-          <span /> LET’S GET STARTED
-        </span>
-        <h1>Create Your Account</h1>
-        <p>Join us and discover something you’ll love.</p>
+        <h1>Create account</h1>
       </div>
       <form
         noValidate
@@ -161,9 +156,6 @@ export default function Register() {
           onChange={change}
           error={errors.password}
         />
-        <p className="input-hint">
-          A strong password is a good place to start.
-        </p>
         <FormNotice errors={errors} notice="" />
         {feedback && (
           <div
@@ -206,20 +198,6 @@ export default function Register() {
         <Link to="/login" className="text-link">
           Sign in <ArrowRight size={13} />
         </Link>
-      </p>
-      <div className="form-divider">
-        <span>HAPPY SHOPPING STARTS HERE</span>
-      </div>
-      <div className="auth-reassurance">
-        <ShieldCheck size={20} strokeWidth={1.4} />
-        <p>
-          Your next favorite is waiting.
-          <br />
-          <span>          Clothing, footwear and everyday essentials.</span>
-        </p>
-      </div>
-      <p className="preview-note">
-        Create an account, then sign in to start exploring.
       </p>
     </AuthLayout>
   );
